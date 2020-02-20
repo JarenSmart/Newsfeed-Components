@@ -112,10 +112,56 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
-const article = document.createElement("div");
-article.classList.add("article");
+const fullArticle = (
+  title,
+  date,
+  firstParagraph,
+  secondParagraph,
+  thirdParagraph
+) => {
+  const article = document.createElement("div");
+  article.classList.add("article");
 
-article.appendChild(article) {
-}
-// const title = document.createElement("h2");
-// title.classList.add(`${title}`);
+  const title = document.createElement("h2");
+  title.textContent = title;
+
+  const date = document.createElement("p");
+  date.classList.add("date");
+
+  const articleP1 = document.createElement("p");
+  articleP1.textContent = firstParagraph;
+
+  const articleP2 = document.createElement("p");
+  articleP2.textContent = secondParagraph;
+
+  const articleP3 = document.createElement("p");
+  articleP3.textContent = thirdParagraph;
+
+  const expButton = document.createElement("span");
+  expButton.classList.add("expandButton");
+  expButton.addEventListener("click", () => {
+    article.classList.toggle("article-open");
+  });
+
+  article.appendChild(title);
+  article.appendChild(date);
+  article.appendChild(expandButton);
+  article.appendChild(articleP1);
+  article.appendChild(articleP2);
+  article.appendChild(articleP3);
+
+  return article;
+};
+
+const articles = document.querySelector(".articles");
+data.forEach(item => {
+  articles.appendChild(
+    fullArticle(
+      item.title,
+      item.date,
+      item.firstParagraph,
+      item.secondParagraph,
+      item.thirdParagraph
+    )
+  );
+});
