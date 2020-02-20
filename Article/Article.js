@@ -85,6 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+
+  {
+    title: "Sammy Dropping Knowledge",
+    date: "April 4th, 2020",
+    firstParagraph: `You think water moves fast? You should see ice. It moves like it has a mind. Like it knows it killed the world once and got
+          taste for murder. After the avalanche, it took us a week to climb out. Now, I don't know exactly when we turned on each other, but I know
+          that seven of us survived the slide... and only five made it out. Now we took an oath, that I'm breaking now. We said we'd say it was the
+          snow that killed the other two, but it wasn't. Nature is lethal but it doesn't hold a candle to man.`,
+    secondParagraph: `My money's in that office, right? If she start giving me some bullshit about it ain't there, and we got to go someplace else
+          and get it, I'm gonna shoot you in the head then and there. Then I'm gonna shoot that bitch in the kneecaps, find out where my goddamn money is.
+          She gonna tell me too. Hey, look at me when I'm talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else
+          is in there, you the first motherfucker to get shot. You understand?`,
+    thirdParagraph: `Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period
+          so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit
+          this morning over this case to hand it over to your dumb ass.`
   }
 ];
 
@@ -103,13 +119,13 @@ const data = [
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+  [x] Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
-  Step 3: return the entire component.
+  [x] Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  [x] Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+  [x] Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
 const fullArticle = (
@@ -119,43 +135,51 @@ const fullArticle = (
   secondParagraph,
   thirdParagraph
 ) => {
-  const article = document.createElement("div");
-  article.classList.add("article");
-
-  const title = document.createElement("h2");
-  title.textContent = title;
-
-  const date = document.createElement("p");
-  date.classList.add("date");
-
+  //elements
+  const mainArticle = document.createElement("div");
+  const articleTitle = document.createElement("h2");
+  const articleDate = document.createElement("p");
   const articleP1 = document.createElement("p");
-  articleP1.textContent = firstParagraph;
-
   const articleP2 = document.createElement("p");
-  articleP2.textContent = secondParagraph;
-
   const articleP3 = document.createElement("p");
-  articleP3.textContent = thirdParagraph;
-
   const expButton = document.createElement("span");
+  const buttonOpen = document.createElement("button");
+  const buttonClose = document.createElement("button");
+
+  //classes created
+  mainArticle.classList.add("article");
+  articleDate.classList.add("date");
   expButton.classList.add("expandButton");
+  buttonOpen.classList.add(".article-open");
+  buttonClose.classList.add(".close");
+
+  //text called from data set
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articleP1.textContent = firstParagraph;
+  articleP2.textContent = secondParagraph;
+  articleP3.textContent = thirdParagraph;
+  expButton.textContent = "Expand";
+
+  mainArticle.appendChild(articleTitle);
+  mainArticle.appendChild(articleDate);
+  mainArticle.appendChild(expButton);
+  mainArticle.appendChild(articleP1);
+  mainArticle.appendChild(articleP2);
+  mainArticle.appendChild(articleP3);
+
   expButton.addEventListener("click", () => {
-    article.classList.toggle("article-open");
+    buttonOpen.classList.toggle("article-open");
+    buttonClose.classList.toggle(".close");
+    mainArticle.classList.toggle("article-open");
   });
 
-  article.appendChild(title);
-  article.appendChild(date);
-  article.appendChild(expandButton);
-  article.appendChild(articleP1);
-  article.appendChild(articleP2);
-  article.appendChild(articleP3);
-
-  return article;
+  return mainArticle;
 };
 
-const articles = document.querySelector(".articles");
+const theArticles = document.querySelector(".articles");
 data.forEach(item => {
-  articles.appendChild(
+  theArticles.appendChild(
     fullArticle(
       item.title,
       item.date,
